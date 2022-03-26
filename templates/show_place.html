@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+
+<h3 align="center">{{ human['human']['name'] }} {{ human['human']['patronymic'] }} {{ human['human']['surname'] }}</h3>
+<h5 align="center">Адрес: {{ human['human']['address'] }}</h5>
+<p align="center"><img src="{{ human['human']['place'] }}"></p>
+<div align="center">
+    <a href={{ map }} target="_blank" class="btn btn-success">На карте</a>
+</div>
+<h5 align="center">{{ human['human']['info'] }}</h5>
+
+{% endblock %}

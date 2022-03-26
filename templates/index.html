@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+
+
+{% for human in people %}
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <hr>
+            <td class="title" width="20%" bgcolor="#dddddd" align="left">Фото</td>
+            <td class="title" width="20%" bgcolor="#dddddd" align="left">Фамилия Имя Отчество</td>
+            <td class="title" width="20%" bgcolor="#dddddd" align="left">Адрес</td>
+            <td class="title" width="40%" bgcolor="#dddddd" align="left">Информация</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#eeeeff">Фото</td>
+            <td class="ordinary" bgcolor="#eeeeff">{{ human.surname }} {{ human.name }} {{ human.patronymic }}</td>
+            <td class="ordinary" bgcolor="#eeeeff">{{ human.address }}</td>
+            <td class="ordinary" bgcolor="#eeeeff">{{ human.info }}</td>
+        </tr>
+    </table>
+</div>
+<br>
+
+<div>
+    <a href="/human_show/{{ human.id }}" class="btn btn-success">На карте</a>
+    <!--Удалять и редактировать может только admin-->
+    {% if current_user.is_authenticated and current_user.speciality == 'admin' %}
+    <a href="/human/{{ human.id }}" class="btn btn-warning">Редактировать</a>
+    <a href="/human_delete/{{ human.id }}" class="btn btn-danger">Удалить</a>
+    {% endif%}
+</div>
+
+
+{% endfor %}
+
+<!--Добавлять может только admin-->
+{% if current_user.is_authenticated and current_user.speciality == 'admin'%}
+<br><br><br>
+<p align="right">
+    <a href="addpeople" class="btn btn-secondary">Добавить ветерана</a>
+{% endif %}
+{% endblock %}
